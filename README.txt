@@ -4,7 +4,7 @@
 
 == DESCRIPTION:
 
-Sweetens up Moch under JRuby to simplify the testing of Java code from JRuby
+Sweetens up Mocha under JRuby to simplify the testing of Java code from JRuby
 
 == FEATURES/PROBLEMS:
 
