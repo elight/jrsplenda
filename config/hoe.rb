@@ -8,7 +8,9 @@ RUBYFORGE_PROJECT = 'jrsplenda'
 HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 DOWNLOAD_PATH = "http://rubyforge.org/projects/#{RUBYFORGE_PROJECT}"
 EXTRA_DEPENDENCIES = [
-#  ['activesupport', '>= 1.3.1']
+  ['activesupport', '>= 2.0.2']
+  ['mocha', '>= 0.5.6']
+  ['rspec', '>= 1.1.3']
 ]    # An array of rubygem dependencies [name, version]
 
 @config_file = "~/.rubyforge/user-config.yml"
