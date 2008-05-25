@@ -12,7 +12,7 @@ end
 task :build_fixtures do
   puts "Building fixtures..."
   ant "build_fixtures"
-  system "jar cf build/jruby-test-classes.jar -C build/classes"
+  system "jar cf build/jrsplenda-fixtures.jar -C build/classes ."
 end
 
 Spec::Rake::SpecTask.new :spec => [:build_fixtures] do |t|

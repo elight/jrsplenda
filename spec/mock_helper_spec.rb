@@ -19,18 +19,24 @@ describe "A mock helper" do
   it "should create a mock of a Java class when given a Java class" do
     import 'fixtures.PrivateField'
     splenda_mock(PrivateField.java_class).class.name.should include("Mock")
-  end
-  
+  end  
   
   describe "when creating a mock object" do
     it "should optionally store the created mock in a Ruby member variable by convention" do
       splenda_mock_attr('fixtures.PrivateField')
-      @private_field.should_not be_nil?
+      @private_field.should_not be_nil
     end
     
     it "should optionally store the created mock in a Ruby member variable specified by the caller" do
       splenda_mock_attr('fixtures.PrivateField', :store_in => :another_field)
-      @another_field.should_not be_nil?
+      @another_field.should_not be_nil
+    end
+    
+    it "should optionally not overwrite existing member variables" do
+      splenda_mock_attr('fixtures.PrivateField')
+      p1 = @private_field
+      splenda_mock_attr('fixtures.PrivateField', :preserve_existing_attr => true)
+      p1.should == @private_field
     end
   end
 end
