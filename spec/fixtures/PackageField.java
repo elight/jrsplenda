@@ -1,7 +1,8 @@
-package java_integration.fixtures;
+package fixtures;
 
 public class PackageField {
-  String strField;
+  String strField = "42";
+  final String finalField = "foo";  
   
   public String getStrField() {
     return strField;

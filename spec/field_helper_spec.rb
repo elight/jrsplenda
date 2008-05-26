@@ -1,16 +1,54 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
-include JRSplenda
+import 'fixtures.PrivateField'
+import 'fixtures.ProtectedField'
+import 'fixtures.PackageField'
 
 describe "A field helper" do
-  describe "accessor" do
-    it "should provide read access to a java.lang.reflect.Field"
-    it "should error when given a non-existent Field name"
+  include JRSplenda::FieldHelper
+  
+  describe "for a private field" do
+    before(:each) do
+      @f = PrivateField.new
+      wrap_java_fields @f
+    end
+    
+    it "should provide an attr set method" do
+      lambda { @f.str_field = "42" }.should_not raise_error
+    end
+    
+    it "should not provide an attr set method if the field is final" do
+      lambda { @f.final_field == "42" }.should raise_error
+    end
   end
   
-  describe "mutator" do
-    it "should provide write access to a java.lang.reflect.Field"
-    it "should error when given a non-existent Field name"
-    it "should error when given the name of a 'final' modified Field"
+  describe "for a protected field" do
+    before(:each) do
+      @f = ProtectedField.new
+      wrap_java_fields @f
+    end
+        
+    it "should provide an attr set method" do
+      lambda { @f.str_field = "42" }.should_not raise_error
+    end
+    
+    it "should not provide an attr set method if the field is final" do
+      lambda { @f.final_field == "42" }.should raise_error
+    end
+  end
+  
+  describe "for a package-scoped field" do
+    before(:each) do
+      @f = PackageField.new
+      wrap_java_fields @f      
+    end
+    
+    it "should provide an attr set method" do
+      lambda { @f.str_field = "42" }.should_not raise_error
+    end
+    
+    it "should not provide an attr set method if the field is final" do
+      lambda { @f.final_field == "42" }.should raise_error
+    end
   end
 end
