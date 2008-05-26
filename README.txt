@@ -1,10 +1,8 @@
 = jrsplenda
 
-* FIX (url)
-
 == DESCRIPTION:
 
-Sweetens up Mocha under JRuby to simplify the testing of Java code from JRuby
+Sweetens up Mocha under JRuby with a few helpers to greatly redeuce the amount of code (and therefore pain!) in your spec setups.
 
 == FEATURES/PROBLEMS:
 
@@ -16,8 +14,10 @@ Sweetens up Mocha under JRuby to simplify the testing of Java code from JRuby
 
 == INSTALL:
 
-* sudo gem install jrsplenda
+1. Clone repository
+2. rake gem_install
 
 == LICENSE:
 
+* MIT
 * See LICENSE file for details
