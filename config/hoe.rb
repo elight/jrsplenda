@@ -15,7 +15,7 @@ EXTRA_DEPENDENCIES = [
 
 @config_file = "~/.rubyforge/user-config.yml"
 @config = nil
-RUBYFORGE_USERNAME = "unknown"
+RUBYFORGE_USERNAME = "sleight42"
 def rubyforge_username
   unless @config
     begin
@@ -40,7 +40,7 @@ VERS = JRSplenda::VERSION::STRING + (REV ? ".#{REV}" : "")
 RDOC_OPTS = ['--quiet', '--title', 'jrsplenda documentation',
     "--opname", "index.html",
     "--line-numbers",
-    "--main", "README",
+    "--main", "README.txt",
     "--inline-source"]
 
 class Hoe
