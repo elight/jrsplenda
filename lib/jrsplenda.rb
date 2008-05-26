@@ -33,3 +33,4 @@ end
 $LOAD_PATH << (File.dirname(__FILE__) + "/jrsplenda")
 require 'jrsplenda_mock_helper'
 require 'jrsplenda_field_helper'
+require 'jrsplenda_method_helper'

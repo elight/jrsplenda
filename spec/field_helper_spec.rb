@@ -51,4 +51,46 @@ describe "A field helper" do
       lambda { @f.final_field == "42" }.should raise_error
     end
   end
+  
+  describe "for a static private field" do
+    before(:all) do
+      wrap_java_fields PrivateField
+    end
+    
+    it "should provide an attr set method" do
+      lambda { PrivateField.static_field = "42" }.should_not raise_error
+    end
+    
+    it "should not provide an attr set method if the field is final" do
+      lambda { PrivateField.static_final_field == "42" }.should raise_error
+    end
+  end
+  
+  describe "for a static protected field" do
+    before(:all) do
+      wrap_java_fields ProtectedField
+    end
+        
+    it "should provide an attr set method" do
+      lambda { ProtectedField.static_field = "42" }.should_not raise_error
+    end
+    
+    it "should not provide an attr set method if the field is final" do
+      lambda { ProtectedField.static_final_field == "42" }.should raise_error
+    end
+  end
+  
+  describe "for a static package-scoped field" do
+    before(:all) do
+      wrap_java_fields PackageField
+    end
+    
+    it "should provide an attr set method" do
+      lambda { PackageField.static_field = "42" }.should_not raise_error
+    end
+    
+    it "should not provide an attr set method if the field is final" do
+      lambda { PackageField.static_final_field == "42" }.should raise_error
+    end
+  end  
 end

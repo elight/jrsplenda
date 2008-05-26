@@ -5,12 +5,19 @@ import 'java.lang.reflect.Modifier'
 module JRSplenda
   module FieldHelper
     def wrap_java_fields(object)
-      object.class.java_class.declared_fields.each do |field|
+      if object.is_a?(Class)
+        klass = object
+        message = :java_class
+      else 
+        klass = object.class
+        message = :java_object
+      end
+      klass.java_class.declared_fields.each do |field|
         next if field.modifiers & (Modifier::PUBLIC | Modifier::FINAL) != 0
         method_name = "#{field.name.underscore}="
         object.singleton_class.send :define_method, method_name do |val|
           field.accessible = true
-          field.set_value(java_object, val.java_object)
+          field.set_value(send(message), val.java_object)
           field.accessible = false
         end
         object.singleton_class.send :alias_method, field.name + "=", method_name
