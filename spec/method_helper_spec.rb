@@ -22,7 +22,7 @@ describe "A method helper" do
   
   it "should provide the ability to invoke package scope Java class methods" do
     wrap_java_methods PackageStaticMethod
-    lambda { PackageStaticMethod.thePackageScopMethod }.should_not raise_error
+    lambda { PackageStaticMethod.thePackageScopeMethod }.should_not raise_error
   end
   
   it "should provide the ability to invoke private Java instance methods" do

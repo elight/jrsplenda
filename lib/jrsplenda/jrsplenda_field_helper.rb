@@ -1,3 +1,5 @@
+require 'active_support'
+
 import 'java.lang.reflect.Modifier'
 
 module JRSplenda

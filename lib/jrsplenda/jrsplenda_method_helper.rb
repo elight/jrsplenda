@@ -1,3 +1,5 @@
+require 'active_support'
+
 import 'java.lang.reflect.Modifier'
 
 module JRSplenda
@@ -19,7 +21,11 @@ module JRSplenda
         ruby_method_name = "#{method.name.underscore}"
         object.singleton_class.send :define_method, ruby_method_name do |*args|
           method.accessible = true
-          method.invoke(send(message), *args)
+          if method.modifiers & Modifier::STATIC != 0
+            method.invoke_static(*args)
+          else
+            method.invoke(send(message), *args)
+          end
           method.accessible = false
         end
         object.singleton_class.send(:alias_method, method_name, ruby_method_name)
