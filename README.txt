@@ -15,7 +15,7 @@ Sweetens up Mocha under JRuby with a few helpers to greatly redeuce the amount o
 == INSTALL:
 
 1. Clone repository
-2. rake gem_install
+2. rake install_gem
 
 == LICENSE:
 
