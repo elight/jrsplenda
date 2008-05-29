@@ -4,16 +4,16 @@ describe "A mock helper" do
   include JRSplenda::MockHelper
   
   it "should create a mock of a Java class when give a Java class name when the Java class has not been imported" do
-    splenda_mock('fixtures.PrivateField').class.name.should include("Mock")
+    splenda_mock('fixtures.PrivateField').should be_a_kind_of(PrivateField)
   end
 
   it "should create a mock of a Java class when give a Java class name when the Java class has been imported" do
-    splenda_mock('fixtures.PrivateField').class.name.should include("Mock")
+    splenda_mock('fixtures.PrivateField').should be_a_kind_of(PrivateField)
   end
   
   it "should create a mock of a Java class when given a Ruby class wrapping the Java class" do
     import 'fixtures.PrivateField'
-    splenda_mock(PrivateField).class.name.should include("Mock")
+    splenda_mock(PrivateField).should be_a_kind_of(PrivateField)
   end
     
   describe "when creating a mock object" do
@@ -31,7 +31,7 @@ describe "A mock helper" do
       splenda_mock_attr('fixtures.PrivateField')
       p1 = @private_field
       splenda_mock_attr('fixtures.PrivateField', :preserve_existing_attr => true)
-      p1.should == @private_field
+      p1.should equal(@private_field)
     end
   end
 end
