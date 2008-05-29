@@ -17,6 +17,10 @@ Sweetens up Mocha under JRuby with a few helpers to greatly redeuce the amount o
 1. Clone repository
 2. rake install_gem
 
+== EXAMPLES
+See: http://pastie.caboo.se/205616
+Where 'StandardOwtWorkflowBean' is an EJB 3.0 session bean with several private Fields.
+
 == LICENSE:
 
 * MIT
