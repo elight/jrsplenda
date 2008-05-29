@@ -15,12 +15,7 @@ describe "A mock helper" do
     import 'fixtures.PrivateField'
     splenda_mock(PrivateField).class.name.should include("Mock")
   end
-  
-  it "should create a mock of a Java class when given a Java class" do
-    import 'fixtures.PrivateField'
-    splenda_mock(PrivateField.java_class).class.name.should include("Mock")
-  end  
-  
+    
   describe "when creating a mock object" do
     it "should optionally store the created mock in a Ruby member variable by convention" do
       splenda_mock_attr('fixtures.PrivateField')

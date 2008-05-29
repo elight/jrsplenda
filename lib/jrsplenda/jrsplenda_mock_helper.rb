@@ -3,10 +3,18 @@ require 'active_support'
 module JRSplenda  
   module MockHelper
     def splenda_mock(arg)
-      arg = java_class_as_string(arg)
-      # Consider whether we really want to import; may want to avoid overlap.  Import by default?
-      import arg
-      vendor_mock Module.const_get(arg.split('.').last)
+      if arg.instance_of? Class
+        if arg.respond_to? :java_class
+          arg = arg.to_s
+        else
+          arg = arg.java_class.to_s
+        end
+      else
+        # Consider whether we really want to import; may want to avoid overlap.  Import by default?
+        import arg
+      end
+      mock_obj = vendor_mock arg
+      mock_obj
     end
     
     def splenda_mock_attr(arg, options = {})
@@ -22,7 +30,7 @@ module JRSplenda
     private
       # default is Mocha but monkey-patch this to support other mock types
       def vendor_mock(arg)
-        mock arg.to_s
+        mock arg
       end
       
       def java_class_as_string(arg)
