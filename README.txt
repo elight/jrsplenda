@@ -9,7 +9,7 @@ Sweetens up Mocha under JRuby with a few helpers to greatly redeuce the amount o
 * Eexpectations added to real (non-mock) Java object in JRuby are not available in JRuby
 * Classes mocked currently require default constructors
 
-<a href="http://elight.lighthouseapp.com/projects/12068-jrsplenda">Report problems on lighthouse.</a>
+Report problems on Lighthouse: http://elight.lighthouseapp.com/projects/12068-jrsplenda
 
 == SYNOPSIS:
 
