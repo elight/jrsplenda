@@ -17,11 +17,12 @@ end
 
 Spec::Rake::SpecTask.new :spec => [:build_fixtures] do |t|
   t.spec_files = FileList['spec/**/*_spec.rb']
+  t.spec_opts = ['--color']
 end
 
 Spec::Rake::SpecTask.new :specdoc => [:build_fixtures] do |t|
   t.spec_files = FileList['spec/**/*_spec.rb']
-  t.spec_opts = ['--format=specdoc']
+  t.spec_opts = ['--format=specdoc --color']
 end
 
 
