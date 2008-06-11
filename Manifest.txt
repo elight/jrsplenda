@@ -11,7 +11,6 @@ lib/jrsplenda/version.rb
 lib/jrsplenda.rb
 License.txt
 Manifest.txt
-Manifest.txt.old
 PostInstall.txt
 Rakefile
 README.txt
