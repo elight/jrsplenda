@@ -12,34 +12,34 @@ describe "A method helper" do
   
   it "should provide the ability to invoke private Java class methods" do
     wrap_java_methods PrivateStaticMethod
-    lambda { PrivateStaticMethod.thePrivateMethod }.should_not raise_error
+    lambda { PrivateStaticMethod.thePrivateMethod.should == "42" }.should_not raise_error
   end
   
   it "should provide the ability to invoke protected Java class methods" do
     wrap_java_methods ProtectedStaticMethod
-    lambda { ProtectedStaticMethod.theProtectedMethod }.should_not raise_error
+    lambda { ProtectedStaticMethod.theProtectedMethod.should == "42" }.should_not raise_error
   end
   
   it "should provide the ability to invoke package scope Java class methods" do
     wrap_java_methods PackageStaticMethod
-    lambda { PackageStaticMethod.thePackageScopeMethod }.should_not raise_error
+    lambda { PackageStaticMethod.thePackageScopeMethod.should == "42"}.should_not raise_error
   end
   
   it "should provide the ability to invoke private Java instance methods" do
     o = PrivateInstanceMethod.new
     wrap_java_methods o
-    lambda { o.thePrivateMethod }.should_not raise_error
+    lambda { o.thePrivateMethod.should == "42" }.should_not raise_error
   end
   
   it "should provide the ability to invoke protected Java instance methods" do
     o = ProtectedInstanceMethod.new
     wrap_java_methods o
-    lambda { o.theProtectedMethod }.should_not raise_error
+    lambda { o.theProtectedMethod.should == "42" }.should_not raise_error
   end
   
   it "should provide the ability to invoke package scope Java instance methods" do
     o = PackageInstanceMethod.new
     wrap_java_methods o
-    lambda { o.thePackageScopeMethod }.should_not raise_error
+    lambda { o.thePackageScopeMethod.should == "42" }.should_not raise_error
   end
 end
