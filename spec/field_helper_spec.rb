@@ -64,6 +64,8 @@ describe "A field helper" do
     it "should not provide an attr set method if the field is final" do
       lambda { PrivateField.static_final_field == "42" }.should raise_error
     end
+    
+    it "should provide an attr get method"
   end
   
   describe "for a static protected field" do
@@ -78,6 +80,8 @@ describe "A field helper" do
     it "should not provide an attr set method if the field is final" do
       lambda { ProtectedField.static_final_field == "42" }.should raise_error
     end
+    
+    it "should provide an attr get method"    
   end
   
   describe "for a static package-scoped field" do
@@ -92,5 +96,7 @@ describe "A field helper" do
     it "should not provide an attr set method if the field is final" do
       lambda { PackageField.static_final_field == "42" }.should raise_error
     end
+    
+    it "should provide an attr get method"
   end  
 end
