@@ -91,7 +91,7 @@ class Class
 end
 
 module Mocha
-  module AutoVerify
+  module Standalone
     alias old_mock mock
     
     def mock(*args)
