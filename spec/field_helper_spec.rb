@@ -14,11 +14,16 @@ describe "A field helper" do
     end
     
     it "should provide an attr set method" do
-      lambda { @f.str_field = "42" }.should_not raise_error
+      @f.str_field = "42" 
     end
     
+    it "should provide an attr get method" do
+      puts ">>> #{@f.str_field.inspect}"
+      @f.str_field.should == "42"
+    end    
+    
     it "should not provide an attr set method if the field is final" do
-      lambda { @f.final_field == "42" }.should raise_error
+      lambda { @f.final_field = "42" }.should raise_error
     end
   end
   
@@ -29,11 +34,15 @@ describe "A field helper" do
     end
         
     it "should provide an attr set method" do
-      lambda { @f.str_field = "42" }.should_not raise_error
+      @f.str_field = "42"
     end
     
+    it "should provide an attr get method" do
+      @f.str_field.should == "42"
+    end    
+    
     it "should not provide an attr set method if the field is final" do
-      lambda { @f.final_field == "42" }.should raise_error
+      lambda { @f.final_field = "42" }.should raise_error
     end
   end
   
@@ -44,11 +53,15 @@ describe "A field helper" do
     end
     
     it "should provide an attr set method" do
-      lambda { @f.str_field = "42" }.should_not raise_error
+      @f.str_field = "42"
+    end
+
+    it "should provide an attr get method" do
+      @f.str_field.should == "42"
     end
     
     it "should not provide an attr set method if the field is final" do
-      lambda { @f.final_field == "42" }.should raise_error
+      lambda { @f.final_field = "42" }.should raise_error
     end
   end
   
@@ -58,11 +71,11 @@ describe "A field helper" do
     end
     
     it "should provide an attr set method" do
-      lambda { PrivateField.static_field = "42" }.should_not raise_error
+      PrivateField.static_field = "42"
     end
     
     it "should not provide an attr set method if the field is final" do
-      lambda { PrivateField.static_final_field == "42" }.should raise_error
+      lambda { PrivateField.static_final_field = "42" }.should raise_error
     end
     
     it "should provide an attr get method"
@@ -74,11 +87,11 @@ describe "A field helper" do
     end
         
     it "should provide an attr set method" do
-      lambda { ProtectedField.static_field = "42" }.should_not raise_error
+      ProtectedField.static_field = "42"
     end
     
     it "should not provide an attr set method if the field is final" do
-      lambda { ProtectedField.static_final_field == "42" }.should raise_error
+      lambda { ProtectedField.static_final_field = "42" }.should raise_error
     end
     
     it "should provide an attr get method"    
@@ -90,11 +103,11 @@ describe "A field helper" do
     end
     
     it "should provide an attr set method" do
-      lambda { PackageField.static_field = "42" }.should_not raise_error
+      PackageField.static_field = "42"
     end
     
     it "should not provide an attr set method if the field is final" do
-      lambda { PackageField.static_final_field == "42" }.should raise_error
+      lambda { PackageField.static_final_field = "42" }.should raise_error
     end
     
     it "should provide an attr get method"

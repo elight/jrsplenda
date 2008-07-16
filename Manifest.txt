@@ -2,6 +2,7 @@ build.xml
 config/hoe.rb
 config/requirements.rb
 History.txt
+lib/jrsplenda/kernel.rb
 lib/jrsplenda/jrsplenda_all_helpers.rb
 lib/jrsplenda/jrsplenda_field_helper.rb
 lib/jrsplenda/jrsplenda_method_helper.rb
