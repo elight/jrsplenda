@@ -18,7 +18,6 @@ describe "A field helper" do
     end
     
     it "should provide an attr get method" do
-      puts ">>> #{@f.str_field.inspect}"
       @f.str_field.should == "42"
     end    
     
