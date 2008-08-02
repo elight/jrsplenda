@@ -31,8 +31,8 @@ end
 
 # The sweetener
 $LOAD_PATH << (File.dirname(__FILE__) + "/jrsplenda")
-require 'jrsplenda_mock_helper'
 require 'jrsplenda_field_helper'
 require 'jrsplenda_method_helper'
+require 'jrsplenda_mock_helper'
 require 'jrsplenda_all_helpers'
 require 'kernel'

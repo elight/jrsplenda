@@ -2,6 +2,9 @@ require 'active_support'
 
 module JRSplenda  
   module MockHelper
+    include JRSplenda::MethodHelper
+    include JRSplenda::FieldHelper
+    
     def splenda_mock(arg)
       if arg.instance_of? Class
         if arg.respond_to? :java_class
@@ -27,6 +30,21 @@ module JRSplenda
       end
     end
     
+    def splenda_partial_mock(arg)
+      if arg.instance_of? Class
+        if arg.respond_to? :java_class
+          arg = arg.java_class.to_s
+        else
+          arg = arg.to_s
+        end
+      else
+        # Consider whether we really want to import; may want to avoid overlap.  Import by default?
+        import arg
+      end
+      mock_obj = partial_mock arg
+      mock_obj
+    end
+        
     private
       # default is Mocha but monkey-patch this to support other mock types
       def vendor_mock(arg)
@@ -39,6 +57,21 @@ module JRSplenda
           puts e.backtrace
         end
       end
+      
+      def partial_mock(arg)
+        import arg
+        begin
+          arg = arg.split('.').last
+          mock = (Module.const_get(arg)).new
+          wrap_java_fields mock
+          wrap_java_methods mock          
+          # add expectation and stubbing behavior here
+        rescue Exception => e
+          puts "Exception: #{e}"
+          puts e.backtrace
+        end
+        mock
+      end      
       
       def java_class_as_string(arg)
         arg = arg.java_class if arg.respond_to? :java_class
