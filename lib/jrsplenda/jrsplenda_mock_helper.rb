@@ -28,8 +28,6 @@ module JRSplenda
         splenda_partial_mock(class_to_mock)
       end      
     end
-  
-#   def splenda_partial_mock_attr(arg, options = {})
         
     private
       def internal_mock(class_name, &block)
