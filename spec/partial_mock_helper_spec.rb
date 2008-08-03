@@ -15,17 +15,32 @@ describe "A mock helper" do
       splenda_partial_mock(PrivateField).should be_a_kind_of(PrivateField)
     end
 
-    it "should not blankslate a partially mocked object" do
+    it "should not blankslate public methods on a partially mocked object" do
+      mock = splenda_partial_mock('fixtures.PublicInstanceMethod')
+      mock.should respond_to(:thePublicMethod1)
+      mock.thePublicMethod1.should == "42"
+    end
+
+    it "should not blankslate jrsplenda exposed methods on a partially mocked object" do
       mock = splenda_partial_mock('fixtures.PrivateInstanceMethod')
       mock.should respond_to(:thePrivateMethod)
       mock.thePrivateMethod.should == "42"
     end
 
-    it "should allow partial mocks to replace a method with an expectation when the #expects method is used" do
+
+    it "should allow partial mocks to replace a jrsplenda exposed method with an expectation when the #expects method is used" do
       mock = splenda_partial_mock('fixtures.PrivateInstanceMethod')
       mock.expects(:thePrivateMethod).returns("43")
       mock.thePrivateMethod.should == "43"
     end
+
+    it "should allow partial mocks to replace a public method with an expectation when the #expects method is used" do
+      mock = splenda_partial_mock('fixtures.PublicInstanceMethod')
+      mock.expects(:thePublicMethod1).returns("43")
+      mock.thePublicMethod1.should == "43"
+      mock.thePublicMethod2.should == "1764"
+    end
+
     
     it "should optionally not overwrite existing member variables on partial mocks" do
       splenda_partial_mock_attr('fixtures.PrivateField')
