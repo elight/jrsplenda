@@ -6,22 +6,13 @@ module JRSplenda
     include JRSplenda::FieldHelper
     
     def splenda_mock(arg)
-      if arg.instance_of? Class
-        if arg.respond_to? :java_class
-          arg = arg.java_class.to_s
-        else
-          arg = arg.to_s
-        end
-      else
-        # Consider whether we really want to import; may want to avoid overlap.  Import by default?
-        import arg
+      internal_mock(arg) do |class_name|
+        vendor_mock(class_name)
       end
-      mock_obj = vendor_mock arg
-      mock_obj
     end
     
     def splenda_mock_attr(arg, options = {})
-      default_field_name = java_class_as_string(arg).split('.').last.underscore
+      default_field_name = stringify_class(arg).split('.').last.underscore
       attr_name = "@" + options.fetch(:store_in, default_field_name).to_s
       should_preserve_attr = options[:preserve_existing_attr]
       current_attr_val = instance_variable_get(attr_name)
@@ -31,21 +22,23 @@ module JRSplenda
     end
     
     def splenda_partial_mock(arg)
-      if arg.instance_of? Class
-        if arg.respond_to? :java_class
-          arg = arg.java_class.to_s
-        else
-          arg = arg.to_s
-        end
-      else
-        # Consider whether we really want to import; may want to avoid overlap.  Import by default?
-        import arg
+      puts "??? #{arg} #{arg.inspect}"
+      internal_mock(arg) do |class_name|
+        partial_mock(class_name)
       end
-      mock_obj = partial_mock arg
-      mock_obj
     end
+   
+#   def splenda_partial_mock_attr(arg, options = {})
         
     private
+      def internal_mock(class_name, &block)
+        if class_name.instance_of? Class
+          class_name = stringify_class(class_name)
+        end
+        mock_obj = yield(class_name)
+        mock_obj
+      end
+    
       # default is Mocha but monkey-patch this to support other mock types
       def vendor_mock(arg)
         import arg
@@ -59,13 +52,21 @@ module JRSplenda
       end
       
       def partial_mock(arg)
+        puts "^^^ #{arg} #{arg.inspect}"
         import arg
         begin
           arg = arg.split('.').last
-          mock = (Module.const_get(arg)).new
+          mock_class = Class.new(Module.const_get(arg))
+          mock_class.class_eval do
+            alias :mocha_expects :expects
+            def expects(method)
+              (class << self; self; end).class_eval{ remove_method method }
+              mocha_expects(method)
+            end
+          end 
+          mock = mock_class.new
           wrap_java_fields mock
-          wrap_java_methods mock          
-          # add expectation and stubbing behavior here
+          wrap_java_methods mock
         rescue Exception => e
           puts "Exception: #{e}"
           puts e.backtrace
@@ -73,9 +74,15 @@ module JRSplenda
         mock
       end      
       
-      def java_class_as_string(arg)
-        arg = arg.java_class if arg.respond_to? :java_class
-        arg.to_s
+      def stringify_class(klass)
+        name = nil
+        if klass.respond_to? :java_class
+          name = klass.java_class.name
+          puts "@@@ #{name} #{name.inspect}"
+        else
+          name = klass.to_s
+        end
+        name
       end
   end
 end  
