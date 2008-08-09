@@ -55,16 +55,16 @@ module JRSplenda
         begin
           arg = arg.split('.').last
           mock_class = Class.new(Module.const_get(arg))
-          mock_class.class_eval do
-            alias :mocha_expects :expects
-            def expects(method)
-              (class << self; self; end).class_eval{ remove_method method }
-              mocha_expects(method)
-            end
-          end 
           mock = mock_class.new
           wrap_java_fields mock
           wrap_java_methods mock
+          mock_class.class_eval do
+            alias :mocha_expects :expects
+            def expects(method)
+              #(class << self; self; end).class_eval{ undef_method method }
+              mocha_expects(method)
+            end
+          end 
         rescue Exception => e
           puts "Exception: #{e}"
           puts e.backtrace
