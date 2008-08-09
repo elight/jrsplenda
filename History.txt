@@ -2,3 +2,8 @@
 
 * 1 major enhancement:
   * Initial release
+
+== 0.3.0 2008-08-09
+
+* Partial mocking
+* JRuby incomptability with RSpec 1.1.4.  Fixed included in RSpec edge
