@@ -17,6 +17,7 @@ describe "A mock helper" do
 
   it "should not blankslate public methods on a partially mocked object" do
     mock = splenda_partial_mock('fixtures.PublicInstanceMethod')
+    mock.stubs(:thePublicMethod2).returns("44")
     mock.should respond_to(:thePublicMethod1)
     mock.thePublicMethod1.should == "42"
   end
@@ -38,6 +39,14 @@ describe "A mock helper" do
     mock = splenda_partial_mock('fixtures.PublicInstanceMethod')
     mock.expects(:thePublicMethod1).returns("43")
     mock.thePublicMethod1.should == "43"
-    mock.thePublicMethod2.should == "1764"
   end
+  
+  it "should receive calls delegated by Java objects" do
+    import 'fixtures.DelegateToPublicInstanceMethod'
+    delegatingObj = DelegateToPublicInstanceMethod.new
+    mock = splenda_partial_mock('fixtures.PublicInstanceMethod')
+    mock.expects(:thePublicMethod1).returns("55")
+    delegatingObj.publicInstanceMethod = mock
+    delegatingObj.delegateDoSomething().should == "55"
+  end  
 end

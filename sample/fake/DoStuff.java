@@ -4,22 +4,28 @@ public class DoStuff {
   private HasPublicMethod privateHasPublicMethod = new HasPublicMethod();
   protected HasPublicMethod protectedHasPublicMethod = new HasPublicMethod();
   HasPublicMethod packageHasPublicMethod = new HasPublicMethod();
+  public HasPublicMethod publicHasPublicMethod = new HasPublicMethod();
 
   public void doItAll() {
-    privateHasPublicMethod.doSomething();
-    protectedHasPublicMethod.doSomething();
+    doSomethingPrivate();
+    doSomethingPackageScope();
+    doSomethingProtected();
+    doSomethingPublic();
+  }
+  
+  void doSomethingPackageScope() {
     packageHasPublicMethod.doSomething();
   }
   
-  void doSomethingSlightlyPromiscuous() {
-    packageHasPublicMethod.doSomething();
-  }
-  
-  protected void doSomethingSomewhatPromiscuous() {
+  protected void doSomethingProtected() {
     protectedHasPublicMethod.doSomething();
   }
   
-  private void doSomethingSneaky() {
+  private void doSomethingPrivate() {
     privateHasPublicMethod.doSomething();
+  }
+  
+  public void doSomethingPublic() {
+    publicHasPublicMethod.doSomething();
   }
 }
