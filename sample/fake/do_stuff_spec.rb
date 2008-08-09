@@ -17,9 +17,9 @@ describe 'Doing stuff' do
   include JRSplenda::MockHelper
 
   before(:each) do
-    splenda_mock_attr 'fake.HasPublicMethod', :store_in => 'private_mock'
-    splenda_mock_attr 'fake.HasPublicMethod', :store_in => 'protected_mock'
-    splenda_mock_attr 'fake.HasPublicMethod', :store_in => 'package_mock'        
+    @private_mock = splenda_mock_attr 'fake.HasPublicMethod'
+    @protected_mock = splenda_mock_attr 'fake.HasPublicMethod'
+    @package_mock = splenda_mock_attr 'fake.HasPublicMethod'
 
     @do_stuff = DoStuff.new
     wrap_java_fields @do_stuff
