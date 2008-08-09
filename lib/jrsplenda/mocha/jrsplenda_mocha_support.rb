@@ -17,9 +17,12 @@ module JtestR
                               # Things for Mocha
                               'mocha', 'reset_mocha', 'stubba_method', 
                               'stubba_object', 'expects', 'stubs', 'verify',
-                              # Things for RSpec
+                              # Things for RSpec 
                               'should', 'should_not', 'kind_of?', 'instance_of?', 'nil?', 'hashCode',
-                              'toString'
+                              'toString', 
+                              # and Mocha 0.9
+                              'method_exists?', 'private_methods', 'protected_methods',
+                              'public_methods', 'object_id'
                              ]
     def self.revert_mocking(clazz)
       clazz.instance_variable_set :@mocking_classes, nil
