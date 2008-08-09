@@ -49,10 +49,11 @@ module JRSplenda
           wrap_java_fields mock
           wrap_java_methods mock
           mock_class.class_eval do
-            alias :mocha_expects :expects
-            def expects(method)
-              # (class << self; self; end).class_eval { undef_method method }
-              # self.class.class_eval { undef_method method }
+            alias_method :mocha_expects, :expects
+            define_method(:expects) do |method|
+              self.class.class_eval do
+                undef_method method if method_exists? method
+              end
               mocha_expects(method)
             end
           end 
