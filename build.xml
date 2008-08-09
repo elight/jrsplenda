@@ -1,5 +1,6 @@
 <project>  
   <property name="src" location="spec/fixtures" />
+  <property name="sample_src" location="sample/fake" />
   <property name="jar_path" location="build/jrsplenda-fixtures.jar" />
   
   <target name="build_fixtures">
@@ -7,7 +8,14 @@
     <mkdir dir="build/classes" />
     <javac srcdir="${src}" destdir="build/classes"/>
   </target>
-  
+
+  <target name="build_sample_fixtures">
+    <mkdir dir="build" />
+    <mkdir dir="build/sample" />    
+    <mkdir dir="build/sample/classes" />
+    <javac srcdir="${sample_src}" destdir="build/sample/classes"/>
+  </target>
+
   <target name="clean">
     <delete dir="build" />
     <delete file ="${jar_path}" />

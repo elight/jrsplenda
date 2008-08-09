@@ -1,7 +1,7 @@
 ## This normally goes in a spec_helper.rb
 
-require 'rubygems'
-require 'jrsplenda'
+require File.join(File.dirname(__FILE__), "..", "..", "lib", "jrsplenda")
+require File.join(File.dirname(__FILE__), "..", "..", "build", "jrsplenda-sample-fixtures.jar")
 
 Spec::Runner.configure do |config|
   config.mock_with :mocha
