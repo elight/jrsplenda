@@ -7,6 +7,7 @@ module JRSplenda
     def wrap_java_fields(object)
       klass = (object.is_a?(Class)) ? object : object.class
       klass.java_class.declared_fields.each do |field|
+        next if field.modifiers & Modifier::PUBLIC != 0
         define_getter(object, field)
         next if field.modifiers & Modifier::FINAL != 0        
         define_setter(object, field)
