@@ -22,7 +22,7 @@ module JtestR
                               'toString', 
                               # and Mocha 0.9
                               'method_exists?', 'private_methods', 'protected_methods',
-                              'public_methods', 'object_id'
+                              'public_methods', 'object_id', 'mocha_inspect'
                              ]
     def self.revert_mocking(clazz)
       clazz.instance_variable_set :@mocking_classes, nil
